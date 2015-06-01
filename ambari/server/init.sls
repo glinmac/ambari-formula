@@ -20,3 +20,11 @@ ambari-server-{{ambari.version}}-pkg:
     - version: {{ version_mapping.get(ambari.version) }}
 {% endif %}
 
+ambari-server-properties:
+  file.managed:
+    - name: /etc/ambari-server/conf/ambari.properties
+    - source: salt://ambari/server/files/ambari.properties
+    - template: jinja
+    - user: root
+    - group: root
+    - permission: 0644

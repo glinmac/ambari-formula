@@ -11,3 +11,10 @@ ambari-server:
 
 /var/lib/ambari-server:
   file.absent
+
+{{ ambari.server.kerberos.keytab.cache.dir }}:
+  file.absent
+
+{{ ambari.server.security.server.keys_dir }}:
+  file.absent
+
