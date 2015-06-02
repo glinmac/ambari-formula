@@ -4,6 +4,9 @@ ambari:
 
   ## Specific configuration for Ambari Agent
   agent:
+    ## Should the agent be started and enabled when deployed
+    ## if false, status/state unchanged
+    start_service: True
     ## All of the following is used for /etc/ambari-agent/conf/ambari-agent.ini
     server:
       hostname: localhost
@@ -40,6 +43,11 @@ ambari:
 
   ## Specific configuration for Ambari Server
   server:
+    ## Should the ambari server be automatically started and enabled
+    ## if false, status/state unchanged
+    start_service: False
+
+    ## server configuration in ambari.properties
     agent:
       package:
         install:

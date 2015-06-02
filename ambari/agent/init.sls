@@ -3,6 +3,9 @@
 
 include:
   - ambari.repo
+  {% if ambari.agent.start_service %}
+  - ambari.agent.service
+  {% endif %}
 
 {% if salt['grains.get']('os_family') == 'RedHat' %}
 ambari-agent-{{ambari.version}}-pkg:
@@ -32,9 +35,4 @@ ambari-agent-{{ambari.version}}-config:
     - require_in:
       - pkg: ambari-agent-{{ambari.version}}-pkg
 
-ambari-agent-service:
-  service.running:
-    - name: ambari-agent
-    - enable: True
-    - require:
-      - pkg: ambari-agent-{{ambari.version}}-pkg
+

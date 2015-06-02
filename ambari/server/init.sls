@@ -3,6 +3,9 @@
 
 include:
   - ambari.repo
+  {% if ambari.server.start_service %}
+  - ambari.server.service
+  {% endif %}
 
 {% if salt['grains.get']('os_family') == 'RedHat' %}
 ambari-server-{{ambari.version}}-pkg:
@@ -28,3 +31,5 @@ ambari-server-properties:
     - user: root
     - group: root
     - permission: 0644
+
+
