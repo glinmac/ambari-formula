@@ -1,6 +1,9 @@
 {% from 'ambari/map.jinja' import ambari with context %}
 {% from 'ambari/map.jinja' import version_mapping with context %}
 
+# Sets which user is running ambari-server
+{% set ambari_user = ambari.server.ambari_server.user %}
+
 include:
   - ambari.repo
   {% if ambari.server.start_service %}
@@ -28,7 +31,16 @@ ambari-server-properties:
     - name: /etc/ambari-server/conf/ambari.properties
     - source: salt://ambari/server/files/ambari.properties
     - template: jinja
-    - user: root
+    - user: {{ ambari_user }}
+    - group: root
+    - permission: 0644
+
+ambari-server-log4j:
+  file.managed:
+    - name: /etc/ambari-server/conf/log4j.properties
+    - source: {{ ambari.server.log4j }}
+    - template: jinja
+    - user: {{ ambari_user }}
     - group: root
     - permission: 0644
 

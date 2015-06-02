@@ -47,6 +47,9 @@ ambari:
     ## if false, status/state unchanged
     start_service: False
 
+    # log4j template
+    log4j: salt://ambari/server/files/log4j.properties
+
     ## server configuration in ambari.properties
     agent:
       package:
