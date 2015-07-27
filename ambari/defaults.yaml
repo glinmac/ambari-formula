@@ -23,6 +23,7 @@ ambari:
       cache_dir: /var/lib/ambari-agent/cache
       tolerate_download_failures: true
       run_as_user: root
+      parallel_execution: 0
     command:
       maxretries: 2
       sleepBetweenRetries: 1
@@ -40,6 +41,8 @@ ambari:
           /var/run/hadoop,/var/run/zookeeper,/var/run/hbase,/var/run/templeton,/var/run/oozie,
           /var/log/hadoop,/var/log/zookeeper,/var/log/hbase,/var/run/templeton,/var/log/hive
       log_lines_count: 300
+    logging:
+      syslog_enabled: 0
 
   ## Specific configuration for Ambari Server
   server:
@@ -106,6 +109,15 @@ ambari:
       jcpol_url: http://public-repo-1.hortonworks.com/ARTIFACTS/UnlimitedJCEPolicyJDK7.zip
       re: (jdk.*)/jre
       url: http://public-repo-1.hortonworks.com/ARTIFACTS/jdk-7u67-linux-x64.tar.gz
+    jdk1_8:
+      desc: Oracle JDK 1.8 + Java Cryptography Extension (JCE) Policy Files 8
+      dest_file: jdk-8u40-linux-x64.tar.gz
+      home: /usr/jdk64/
+      jcpol_file: jce_policy-8.zip
+      jcpol_url: http://public-repo-1.hortonworks.com/ARTIFACTS/jce_policy-8.zip
+      re: (jdk.*)/jre
+      url: http://public-repo-1.hortonworks.com/ARTIFACTS/jdk-8u40-linux-x64.tar.gz
+
     kerberos:
       keytab:
         cache:
@@ -161,7 +173,7 @@ ambari:
       stages:
         parallel: true
       tmp:
-        dir: /var/lib/ambari-server/tmp
+        dir: /var/lib/ambari-server/data/tmp
       version:
         file: /var/lib/ambari-server/resources/version
     shared:

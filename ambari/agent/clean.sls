@@ -12,6 +12,9 @@ ambari-agent:
 /var/lib/ambari-agent:
   file.absent
 
+/usr/lib/ambari-agent:
+  file.absent
+
 {{ ambari.agent.agent.prefix }}:
   file.absent
 
