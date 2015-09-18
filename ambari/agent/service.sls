@@ -10,4 +10,4 @@ ambari-agent-svc:
     - require:
       - pkg: ambari-agent-{{ambari.version}}-pkg
     - watch:
-      - file: ambari-agent-{{ambari.version}}-config:
+      - file: ambari-agent-{{ambari.version}}-config
