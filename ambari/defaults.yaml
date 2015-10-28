@@ -145,6 +145,8 @@ ambari:
       keytab:
         cache:
           dir: /var/lib/ambari-server/data/cache
+        path: /etc/security/keytabs/ambari.server.keytab
+      principal: ambari-server@EXAMPLE.COM
     metadata:
       path: /var/lib/ambari-server/resources/stacks
     recommendations:
