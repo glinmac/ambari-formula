@@ -143,6 +143,7 @@ ambari:
         max:
           idle:
             millis: 900000
+      ecCacheSizeValue:
       execution:
         scheduler:
           isClustered: false
@@ -158,6 +159,12 @@ ambari:
         session:
           inactive_timeout: 1800
       jdbc:
+        connection_pool:
+          acquisition_size:
+          max_age:
+          max_idle_time:
+          max_idle_time_excess:
+          idle_test_interval:
         database: postgres
         database_name: ambari
         driver: org.postgresql.Driver
