@@ -69,8 +69,27 @@ ambari:
     ambari:
       python:
         wrap: ambari-python-wrap
+      ldap:
+        isConfigured: false
     api:
       authenticate: true
+
+    authentication:
+      ldap:
+        baseDn:
+        bindAnonymously:
+        dnAttribute:
+        groupMembershipAttr:
+        groupNamingAttr:
+        groupObjectClass:
+        managerDn:
+        managerPassword: /etc/ambari-server/conf/ldap-password.dat
+        primaryUrl:
+        secondaryUrl:
+        referral:
+        usernameAttribute:
+        userObjectClass:
+        useSSL:
     bootstrap:
       dir: /var/run/ambari-server/bootstrap
       script: /usr/lib/python2.6/site-packages/ambari_server/bootstrap.py
@@ -196,6 +215,11 @@ ambari:
     skip:
       service:
         checks: false
+    ssl:
+      trustStore:
+        password:
+        path:
+        type:
     stackadvisor:
       script: /var/lib/ambari-server/resources/scripts/stack_advisor.py
     ulimit:
