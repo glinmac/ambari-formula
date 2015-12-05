@@ -9,7 +9,7 @@ include:
 
 {% if salt['grains.get']('os_family') == 'RedHat' %}
 ambari-agent-{{ambari.version}}-pkg:
-  pkg.latest:
+  pkg.uptodate:
     - name: ambari-agent
     - fromrepo: ambari-{{ ambari.version }}
     - version: {{ ambari.version }}
