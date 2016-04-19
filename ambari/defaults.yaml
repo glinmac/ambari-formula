@@ -52,6 +52,8 @@ ambari:
 
     # log4j template
     log4j: salt://ambari/server/files/log4j.properties
+    log:
+      dir: /var/log/ambari-server
 
     ## server configuration in ambari.properties
     agent:
