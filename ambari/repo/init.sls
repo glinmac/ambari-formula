@@ -2,7 +2,7 @@
 
 {% set centos_v = 'centos7' if  salt['grains.get']('osmajorrelease') == '7' else 'centos6' %}
 
-ambari-repo-2.2.2:
+ambari-repo-2.2.2.0:
   pkgrepo.managed:
     - name: ambari-2.2.2.0
     - humanname: ambari-2.2.2.0
@@ -138,7 +138,6 @@ ambari-repo-2.2.2.0:
     - name: deb http://public-repo-1.hortonworks.com/ambari/debian7/2.x/updates/2.2.2.0 Ambari main
     - keyserver: keyserver.ubuntu.com
     - keyid: B9733A7A07513CAD
-
 
 ambari-repo-2.2.1.1:
   pkgrepo.managed:
