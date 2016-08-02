@@ -8,6 +8,10 @@ ambari-repo-2.2.1.1:
   pkgrepo.absent:
     - name: ambari-2.2.1.1
 
+ambari-repo-2.2.1.0:
+  pkgrepo.absent:
+    - name: ambari-2.2.1.0
+
 ambari-repo-2.2.0.0:
   pkgrepo.absent:
     - name: ambari-2.2.0.0
@@ -19,6 +23,10 @@ ambari-repo-2.1.2.1:
 ambari-repo-2.1.2:
   pkgrepo.absent:
     - name: ambari-2.1.2
+
+ambari-repo-2.1.1:
+  pkgrepo.absent:
+    - name: ambari-2.1.1
 
 ambari-repo-2.1:
   pkgrepo.absent:
