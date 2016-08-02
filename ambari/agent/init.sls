@@ -9,10 +9,10 @@ include:
 
 {% if salt['grains.get']('os_family') == 'RedHat' %}
 ambari-agent-{{ambari.version}}-pkg:
-  pkg.uptodate:
+  pkg.installed:
     - name: ambari-agent
     - fromrepo: ambari-{{ ambari.version }}
-    - version: {{ ambari.version }}
+    - version: {{ version_mapping.get(ambari.version) }}
 {% endif %}
 
 {% if salt['grains.get']('os_family') == 'Debian' %}
@@ -34,5 +34,3 @@ ambari-agent-{{ambari.version}}-config:
     - makedirs: True
     - require_in:
       - pkg: ambari-agent-{{ambari.version}}-pkg
-
-
