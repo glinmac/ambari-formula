@@ -139,6 +139,7 @@ ambari-repo-2.2.2.0:
     - keyserver: keyserver.ubuntu.com
     - keyid: B9733A7A07513CAD
 
+
 ambari-repo-2.2.1.1:
   pkgrepo.managed:
     - name: deb http://public-repo-1.hortonworks.com/ambari/debian7/2.x/updates/2.2.1.1 Ambari main

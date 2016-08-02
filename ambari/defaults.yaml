@@ -64,6 +64,10 @@ ambari:
         install:
           task:
             timeout: 1800
+      stack:
+        retry:
+          on_repo_unavailability: false
+          tries: 5
       task:
         timeout: 900
       threadpool:
@@ -110,15 +114,19 @@ ambari:
     custom:
       action:
         definitions: /var/lib/ambari-server/resources/custom_action_definitions
+    http:
+      strict_transport_security: max-age=31536000
+      x_xss_protection: 1; mode=block
+      x_frame_options: DENY
     java:
-      home: /usr/jdk64/jdk1.7.0_67
-      releases: jdk1.7,jdk1.6
+      home: /usr/jdk64/jdk1.8.0_60
+      releases: jdk1.8,jdk1.7
     jce:
-      name: UnlimitedJCEPolicyJDK7.zip
+      name: jce_policy-8.zip
       download:
         supported: True
     jdk:
-      name: jdk-7u67-linux-x64.tar.gz
+      name: jdk-8u60-linux-x64.tar.gz
       download:
         supported: True
     jdk1_6:
@@ -130,7 +138,7 @@ ambari:
       re: Creating (jdk.*)/jre
       url: http://public-repo-1.hortonworks.com/ARTIFACTS/jdk-6u31-linux-x64.bin
     jdk1_7:
-      desc: Oracle JDK 1.7
+      desc: Oracle JDK 1.7 + Java Cryptography Extension (JCE) Policy Files 7
       dest_file: jdk-7u67-linux-x64.tar.gz
       home: /usr/jdk64/
       jcpol_file: UnlimitedJCEPolicyJDK7.zip
@@ -139,12 +147,12 @@ ambari:
       url: http://public-repo-1.hortonworks.com/ARTIFACTS/jdk-7u67-linux-x64.tar.gz
     jdk1_8:
       desc: Oracle JDK 1.8 + Java Cryptography Extension (JCE) Policy Files 8
-      dest_file: jdk-8u40-linux-x64.tar.gz
+      dest_file: jdk-8u60-linux-x64.tar.gz
       home: /usr/jdk64/
       jcpol_file: jce_policy-8.zip
       jcpol_url: http://public-repo-1.hortonworks.com/ARTIFACTS/jce_policy-8.zip
       re: (jdk.*)/jre
-      url: http://public-repo-1.hortonworks.com/ARTIFACTS/jdk-8u40-linux-x64.tar.gz
+      url: http://public-repo-1.hortonworks.com/ARTIFACTS/jdk-8u60-linux-x64.tar.gz
 
     kerberos:
       keytab:
@@ -156,8 +164,21 @@ ambari:
       path: /var/lib/ambari-server/resources/stacks
     recommendations:
       dir: /var/run/ambari-server/stack-recommendations
+    recovery:
+      type: AUTO_START
+      enabled_components: METRICS_COLLECTOR
+      lifetime_max_count: 1024
     resources:
       dir: /var/lib/ambari-server/resources
+    rolling:
+      upgrade:
+        min:
+          stack: HDP-2.2
+        max:
+          stack:
+        skip:
+          packages:
+            prefixes:
     security:
       server:
         keys_dir: /var/lib/ambari-server/keys
@@ -212,6 +233,8 @@ ambari:
         type: local
       stages:
         parallel: true
+      task:
+        timeout: 1200
       tmp:
         dir: /var/lib/ambari-server/data/tmp
       version:
@@ -232,7 +255,26 @@ ambari:
     ulimit:
       open:
         files: 10000
+    user:
+      inactivity:
+        timeout:
+          default: 0
+          role:
+            readonly:
+              default: 0
     views:
+      ambari:
+        request:
+          connect:
+            timeout:
+              millis: 5000
+          read:
+            timeout:
+              millis: 10000
+      http:
+        strict_transport_security: max-age=31536000
+        x_xss_protection: 1; mode=block
+        x_frame_options: SAMEORIGIN
       request:
         connect:
           timeout:
