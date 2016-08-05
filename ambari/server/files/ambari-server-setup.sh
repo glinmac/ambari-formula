@@ -3,7 +3,7 @@
 {%- from 'ambari/map.jinja' import ambari with context %}
 {%- set config = ambari.server %}
 
-CHECK_RUN=/etc/ambari-server/scripts/ambari-server-setup.run
+CHECK_RUN=/var/run/ambari-server/scripts/ambari-server-setup.run
 
 if [ -e "$CHECK_RUN" ]; then
   exit 0
@@ -35,9 +35,9 @@ else
 
 {%- endif %}
 
-  if  [ $? -eq 0 ]; then
+  if  [ ${PIPESTATUS[0]} -eq 0 ]; then
     touch $CHECK_RUN
   else
-    exit 1
+    exit ${PIPESTATUS[0]}
   fi
 fi
