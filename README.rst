@@ -44,6 +44,27 @@ Remove all packages, configuration and files related to ambari-agent.
 
 Install the ``ambari-server`` package.
 
+``ambari.server.setup``
+-----------------------
+
+An optional state to wrap the ``ambari-server setup`` command to initialize
+the Ambari server.
+
+It is by default not activated and can either be triggered explicitly:
+
+    salt 'my-agents*' state.sls ambari.server.setup test=True
+
+or activated within the ``ambari.server`` state by setting the pillar value:
+
+    ambari:
+      server:
+        run_ambari_server_setup: True
+
+.. note::
+  * Only supports local database and remote postgres database
+  * States don't manage yet deployment of JDBC driver required
+
+
 ``ambari.server.clean``
 ----------------------
 

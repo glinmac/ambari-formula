@@ -2,6 +2,23 @@ ambari:
 
   version: 1.7.0
 
+  ## Specific configuration for Ambari repositories
+  repo:
+    # list of repositories to deploy
+    versions:
+      - 1.7.0
+      - 2.0.0
+      - 2.0.1
+      - 2.0.2
+      - 2.1
+      - 2.1.1
+      - 2.1.2
+      - 2.1.2.1
+      - 2.2.0.0
+      - 2.2.1.0
+      - 2.2.1.1
+      - 2.2.2.0
+
   ## Specific configuration for Ambari Agent
   agent:
     ## Should the agent be started and enabled when deployed
@@ -52,6 +69,9 @@ ambari:
     ## Should the ambari server be automatically started and enabled
     ## if false, status/state unchanged
     start_service: False
+
+    ## wether to automatically run the ambari-server setup command
+    run_ambari_server_setup: False
 
     # log4j template
     log4j: salt://ambari/server/files/log4j.properties
@@ -223,12 +243,14 @@ ambari:
         user:
           name: ambari
           passwd: /etc/ambari-server/conf/password.dat
+          passwd_raw: bigdata
         rca:
           driver: org.postgresql.Driver
           url: jdbc:postgresql://debian7-1.glinmac.dev:5432/ambari
           user:
             name: ambari
             passwd: /etc/ambari-server/conf/password.dat
+            passwd_raw: bigdata
       persistence:
         type: local
       stages:

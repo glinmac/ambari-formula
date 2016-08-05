@@ -153,12 +153,14 @@ ambari:
         user:
           name: ambari
           passwd: /etc/ambari-server/conf/password.dat
+          passwd_raw: bigdata
         rca:
           driver: org.postgresql.Driver
           url: jdbc:postgresql://debian7-1.glinmac.dev:5432/ambari
           user:
             name: ambari
             passwd: /etc/ambari-server/conf/password.dat
+            passwd_raw: bigdata
       persistence:
         type: local
       stages:
