@@ -59,7 +59,7 @@ ambari-server-jass:
 ambari-server-password-file:
   file.managed:
     - name: {{ ambari.server.server.jdbc.user.passwd }}
-    - content: {{ ambari.server.server.jdbc.user.passwd_raw }}
+    - contents: {{ ambari.server.server.jdbc.user.passwd_raw }}
     - user: {{ ambari_user }}
     - group: root
     - permission: 0600

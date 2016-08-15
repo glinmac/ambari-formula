@@ -3,7 +3,7 @@
 {%- from 'ambari/map.jinja' import ambari with context %}
 {%- set config = ambari.server %}
 
-CHECK_RUN=/var/run/ambari-server/scripts/ambari-server-setup.run
+CHECK_RUN=/var/run/ambari-server/ambari-server-setup.run
 
 if [ -e "$CHECK_RUN" ]; then
   exit 0
@@ -29,7 +29,7 @@ else
 {%- endif %}
         --databaseusername={{ config.server.jdbc.user.name }} \
         --databasepassword=$(cat {{ config.server.jdbc.user.passwd }}) \
-        --jdbc-driver={{ config.server.jdbc.driver }} \
+        --jdbc-driver={{ config.server.jdbc.driver.path }} \
         --jdbc-db={{ config.server.jdbc.database }} \
         | tee 2>&1 {{ config.log.dir }}/ambari-server-setup.out
 
