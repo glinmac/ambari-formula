@@ -6,6 +6,8 @@ include:
 ambari-server-scritps-dir:
   file.directory:
     - name: /etc/ambari-server/scripts
+    - require:
+      - sls: ambari.server
 
 {% if ambari.server.server.jdbc.database == 'postgres' %}
 ambari-server-database-postgres-init:
@@ -33,8 +35,8 @@ ambari-server-setup-script:
     - group: root
     - permission: 0755
 
-#run-ambari-server-setup:
-#  cmd.run:
-#    - name:  sh /etc/ambari-server/scripts/ambari-server-setup.sh
-#    - creates: /var/run/ambari-server/ambari-server-setup.run
-#    - user: {{ ambari.server.ambari_server.user }}
+run-ambari-server-setup:
+  cmd.run:
+    - name:  sh /etc/ambari-server/scripts/ambari-server-setup.sh
+    - creates: /var/run/ambari-server/ambari-server-setup.run
+    - user: {{ ambari.server.ambari_server.user }}

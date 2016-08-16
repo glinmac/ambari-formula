@@ -7,7 +7,7 @@ ambari-server-svc:
   service.running:
     - name: ambari-server
     - enable: True
-    - require_in:
+    - require:
       - pkg: ambari-server-{{ambari.version}}-pkg
     - watch:
       - file: ambari-server-properties

@@ -6,11 +6,11 @@
 
 include:
   - ambari.repo
-  {% if ambari.server.start_service %}
-  - ambari.server.service
-  {% endif %}
   {% if ambari.server.run_ambari_server_setup %}
   - ambari.server.setup
+  {% endif %}
+  {% if ambari.server.start_service %}
+  - ambari.server.service
   {% endif %}
 
 {% if salt['grains.get']('os_family') == 'RedHat' %}
@@ -59,7 +59,8 @@ ambari-server-jass:
 ambari-server-password-file:
   file.managed:
     - name: {{ ambari.server.server.jdbc.user.passwd }}
-    - contents: {{ ambari.server.server.jdbc.user.passwd_raw }}
+    - contents: {{ ambari.server.server.jdbc.user.passwd_raw }}]
+    - contents_newline: False
     - user: {{ ambari_user }}
     - group: root
     - permission: 0600

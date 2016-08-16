@@ -144,7 +144,9 @@ ambari:
       jdbc:
         database: postgres
         database_name: ambari
-        driver: org.postgresql.Driver
+        driver:
+          class: org.postgresql.Driver
+          path: /usr/lib/ambari-server/postgresql-9.3-1101-jdbc4.jar
         hostname: localhost
         port: 5432
         url: jdbc:postgresql://debian7-1.glinmac.dev:5432/ambari
@@ -155,7 +157,9 @@ ambari:
           passwd: /etc/ambari-server/conf/password.dat
           passwd_raw: bigdata
         rca:
-          driver: org.postgresql.Driver
+          driver:
+            class: org.postgresql.Driver
+            path: /usr/lib/ambari-server/postgresql-9.3-1101-jdbc4.jar
           url: jdbc:postgresql://debian7-1.glinmac.dev:5432/ambari
           user:
             name: ambari
