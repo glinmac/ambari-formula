@@ -4,6 +4,30 @@
 
 {% set centos_v = 'centos7' if  salt['grains.get']('osmajorrelease') == '7' else 'centos6' %}
 
+{% if '2.4.1.0' in ambari.repo.versions %}
+ambari-repo-2.4.1.0:
+  pkgrepo.managed:
+    - name: ambari-2.4.1.0
+    - humanname: ambari-2.4.1.0
+    - baseurl: http://public-repo-1.hortonworks.com/ambari/{{centos_v}}/2.x/updates/2.4.1.0
+    - gpgcheck: 1
+    - gpgkey: http://public-repo-1.hortonworks.com/ambari/{{centos_v}}/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins
+    - enabled: 0
+    - priority: 1
+{% endif %}
+
+{% if '2.4.0.1' in ambari.repo.versions %}
+ambari-repo-2.4.0.1:
+  pkgrepo.managed:
+    - name: ambari-2.4.0.1
+    - humanname: ambari-2.4.0.1
+    - baseurl: http://public-repo-1.hortonworks.com/ambari/{{centos_v}}/2.x/updates/2.4.0.1
+    - gpgcheck: 1
+    - gpgkey: http://public-repo-1.hortonworks.com/ambari/{{centos_v}}/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins
+    - enabled: 0
+    - priority: 1
+{% endif %}
+
 {% if '2.2.2.0' in ambari.repo.versions %}
 ambari-repo-2.2.2.0:
   pkgrepo.managed:
@@ -159,6 +183,22 @@ ambari-repo-1.7.0:
 
 {% if salt['grains.get']('os') == 'Debian' %}
 
+{% if '2.4.1.0' in ambari.repo.versions %}
+ambari-repo-2.4.1.0:
+  pkgrepo.managed:
+    - name: deb http://public-repo-1.hortonworks.com/ambari/debian7/2.x/updates/2.4.1.0 Ambari main
+    - keyserver: keyserver.ubuntu.com
+    - keyid: B9733A7A07513CAD
+{% endif %}
+
+{% if '2.4.0.1' in ambari.repo.versions %}
+ambari-repo-2.4.0.1:
+  pkgrepo.managed:
+    - name: deb http://public-repo-1.hortonworks.com/ambari/debian7/2.x/updates/2.4.0.1 Ambari main
+    - keyserver: keyserver.ubuntu.com
+    - keyid: B9733A7A07513CAD
+{% endif %}
+
 {% if '2.2.2.0' in ambari.repo.versions %}
 ambari-repo-2.2.2.0:
   pkgrepo.managed:
@@ -211,7 +251,23 @@ ambari-repo-2.1.2:
 
 {% if salt['grains.get']('oscodename') == 'precise' %}
 
-{% if '2.2.1.0' in ambari.repo.versions %}
+{% if '2.4.1.0' in ambari.repo.versions %}
+ambari-repo-2.4.1.0:
+  pkgrepo.managed:
+    - name: deb http://public-repo-1.hortonworks.com/ambari/ubuntu12/2.x/updates/2.4.1.0 Ambari main
+    - keyserver: keyserver.ubuntu.com
+    - keyid: B9733A7A07513CAD
+{% endif %}
+
+{% if '2.4.0.1' in ambari.repo.versions %}
+ambari-repo-2.4.0.1:
+  pkgrepo.managed:
+    - name: deb http://public-repo-1.hortonworks.com/ambari/ubuntu12/2.x/updates/2.4.0.1 Ambari main
+    - keyserver: keyserver.ubuntu.com
+    - keyid: B9733A7A07513CAD
+{% endif %}
+
+{% if '2.2.2.0' in ambari.repo.versions %}
 ambari-repo-2.2.2.0:
   pkgrepo.managed:
     - name: deb http://public-repo-1.hortonworks.com/ambari/ubuntu12/2.x/updates/2.2.2.0 Ambari main
@@ -292,6 +348,22 @@ ambari-repo-1.7.0:
 {% endif %}
 
 {% elif salt['grains.get']('oscodename') == 'trusty' %}
+
+{% if '2.4.1.0' in ambari.repo.versions %}
+ambari-repo-2.4.1.0:
+  pkgrepo.managed:
+    - name: deb http://public-repo-1.hortonworks.com/ambari/ubuntu14/2.x/updates/2.4.1.0 Ambari main
+    - keyserver: keyserver.ubuntu.com
+    - keyid: B9733A7A07513CAD
+{% endif %}
+
+{% if '2.4.0.1' in ambari.repo.versions %}
+ambari-repo-2.4.0.1:
+  pkgrepo.managed:
+    - name: deb http://public-repo-1.hortonworks.com/ambari/ubuntu14/2.x/updates/2.4.0.1 Ambari main
+    - keyserver: keyserver.ubuntu.com
+    - keyid: B9733A7A07513CAD
+{% endif %}
 
 {% if '2.2.2.0' in ambari.repo.versions %}
 ambari-repo-2.2.2.0:
